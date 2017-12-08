@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+  nodegpp:
+    build:
+      context: .
+      dockerfile: nodegpp.Dockerfile  
+  iotreceiver:
+    build:
+      context: .
+      dockerfile: iotreceiver.Dockerfile
+    depends_on:
+      - nodegpp
+  iotconsumer:
+    image: iotnodejsconsumer_iotreceiver
+    ports:
+      - "8000:8000"
+    depends_on:
+      - iotreceiver
+    environment:
+      - DATABASE=<your data here>
+      - DBTABLE=<your data here>.ELEVATOR_STATUS
+      - DBPORT=<your data here>
+      - DBUID=<your data here>
+      - DBPWD=<your data here>
+      - DBHOSTNAME=<your data here>
+      - IOTORG=<your data here>
+      - IOTAUTHKEY=<your data here>
+      - IOTAUTHTOKEN=<your data here>
+    

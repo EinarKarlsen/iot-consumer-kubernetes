@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: iotconsumer-dp
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: iotconsumer
+    spec:
+      containers:
+      - name: iotconsumer
+        image: <your value>/iotreceiver
+        ports:
+        - name: iotconsumerport
+          containerPort: 8000
+        resources:
+          requests:
+            cpu: 100m
+            memory: 512Mi 
+        env:
+          - name: DATABASE
+            value: <your value>
+          - name: DBTABLE
+            value: <your value>.ELEVATOR_STATUS
+          - name: DBPORT
+            value: "<your value>"
+          - name: DBUID
+            value: <your value>
+          - name: DBPWD
+            value: <your value> 
+          - name: DBHOSTNAME
+            value: <your value>
+          - name: IOTORG
+            value: <your value>
+          - name: IOTAUTHKEY
+            value: <your value>
+          - name: IOTAUTHTOKEN
+            value: <your value>

@@ -6,10 +6,9 @@ metadata:
     app: iotconsumer
 spec:
   type: NodePort
-  selector:
-     app: iotconsumer
   ports:
-  - port: 8000
-    targetPort: iotconsumerport
+  - port: 8000 # Internal Port
     protocol: TCP
-    nodePort: 31888
+    nodePort: 31513
+  selector:
+    app: iotconsumer
